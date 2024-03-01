@@ -30,9 +30,10 @@ Route::prefix('category')->group(function () {
     Route::get('/baby-kid', [ProductsController::class, 'category4']);
 });
 
-Route::get('/user/{id}/name/{name}', [UserController::class, 'index']);
+// Route::get('/user/{id}/name/{name}', [UserController::class, 'index']);
 
 Route::get('/selling', [SellingController::class, 'index']);
 
 Route::get('/level', [LevelController::class, 'index']);
 Route::get('/kategori', [KategoriController::class, 'index']);
+ROute::get('/user', [UserController::class, 'index']);
