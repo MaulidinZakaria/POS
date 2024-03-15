@@ -1,10 +1,7 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
-use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\SellingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Monolog\Level;
@@ -20,22 +17,17 @@ use Monolog\Level;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
-
-// Route::prefix('category')->group(function () {
-//     Route::get('/', [ProductsController::class, 'index']);
-//     Route::get('/food-beverage', [ProductsController::class, 'category1']);
-//     Route::get('/beauty-health', [ProductsController::class, 'category2']);
-//     Route::get('/home-care', [ProductsController::class, 'category3']);
-//     Route::get('/baby-kid', [ProductsController::class, 'category4']);
-// });
-
-// Route::get('/user/{id}/name/{name}', [UserController::class, 'index']);
-
-Route::get('/selling', [SellingController::class, 'index']);
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('/level', [LevelController::class, 'index']);
 Route::get('/kategori', [KategoriController::class, 'index']);
+Route::get('/kategori/create', [KategoriController::class, 'create'])->name('createKategori');
+Route::post('/kategori', [KategoriController::class, 'store'])->name('storeKategori');
+Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit'])->name('editKategori');
+Route::put('/kategori/{id}', [KategoriController::class, 'update'])->name('updateKategori');
+Route::get('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->name('destroyKategori');
 Route::get('/user', [UserController::class, 'index'])->name('/user');
 
 
