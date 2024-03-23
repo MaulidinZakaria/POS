@@ -14,14 +14,14 @@
         <form action="{{route('storeKategori')}}" method="post">
             <div class="card-body">
                 <div class="form-group">
-                    <label for="kodeKategori">Kode Kategori</label>
-                    <input type="text" class="form-control @error('kodeKategori') is-invalid" @enderror id="kodeKategori" name="kategori_kode" placeholder="untuk makanan. contoh: MKN">
-                    @error('kodeKategori')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                    <label for="kategori_kode">Kode Kategori</label>
+                    <input type="text" class="form-control @error('kategori_kode') is-invalid @enderror" id="kodeKategori" name="kategori_kode" placeholder="Masukkan kode kategori">
+                    @error('kategori_kode')
+                    <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="namaKategori">Nama Kategori</label>
+                    <label for="kategori_nama">Nama Kategori</label>
                     <input type="text" class="form-control" id="namaKategori" name="kategori_nama" placeholder="Nama">
                 </div>
             </div>
