@@ -21,12 +21,17 @@ class KategoriController extends Controller
         return view('kategori.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        KategoriModel::create([
-            'kategori_kode' => $request->kodeKategori,
-            'kategori_nama' => $request->namaKategori,
+        $validated = $request->validate([
+            'kategori_kode' => 'required',
+            'kategori_nama' => 'required',
         ]);
+        
+        // KategoriModel::create([
+        //     'kategori_kode' => $request->kodeKategori,
+        //     'kategori_nama' => $request->namaKategori,
+        // ]);
 
         return redirect('/kategori');
     }

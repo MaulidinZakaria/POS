@@ -25,12 +25,12 @@ class StorePostRequest extends FormRequest
         return [
             'kategori_kode' => 'required',
             'kategori_nama' => 'required',
-            'level_id' => 'required',
-            'username' => 'required',
-            'nama' => 'required',
-            'password' => 'required',
-            'level_kode' => 'required',
-            'level_nama' => 'required',
+            // 'level_id' => 'required',
+            // 'username' => 'required',
+            // 'nama' => 'required',
+            // 'password' => 'required',
+            // 'level_kode' => 'required',
+            // 'level_nama' => 'required',
         ];
     }
 
