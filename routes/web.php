@@ -6,6 +6,7 @@ use App\Http\Controllers\POSController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Monolog\Level;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,7 @@ use Monolog\Level;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WelcomeController::class, 'index']);
 
 Route::get('/level', [LevelController::class, 'index']);
 Route::get('/kategori', [KategoriController::class, 'index']);
@@ -47,3 +46,4 @@ Route::get('/form-user', function () {
 });
 
 Route::resource('m_user', POSController::class);
+
