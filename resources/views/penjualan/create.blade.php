@@ -93,7 +93,7 @@
                                             <td class="text-center">{{ $dt->harga_jual }}</td>
                                             <td class="text-center">
                                                 <!-- <button type="button" data-toggle="modal" data-target="#stokModal{{$dt->barang_id}}" class="btn btn-primary">Pilih</button> -->
-                                                <div class="btn btn-primary" onclick="tambahKeranjang({{ $dt->barang_id }}, '{{ $dt->barang_nama }}', {{ $dt->harga_jual }}, 1)">Pilih</div>
+                                                <div class="btn btn-primary" onclick="tambahKeranjang({{ $dt->barang_id }}, '{{ $dt->barang_nama }}', {{ $dt->harga_jual }}, 1, {{ $dt->stok->stok_jumlah }})">Pilih</div>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -131,8 +131,8 @@
             <div class="form-group row">
                 <label class="col-1 control-label col-form-label"></label>
                 <div class="col-11">
-                    <button type="submit" class="btn btn-primary btn-sm">Simpan Transaksi</button>
-                    <a class="btn btn-sm btn-default ml-1" href="{{ url('penjualan') }}">Kembali</a>
+                    <button type="submit" class="btn btn-primary">Simpan Transaksi</button>
+                    <a class="btn btn-default ml-1" href="{{ url('penjualan') }}">Kembali</a>
                 </div>
             </div>
         </div>
@@ -146,7 +146,7 @@
     let tableBarang = document.getElementById("table_barang");
     let items = [];
 
-    function templateBaris(barangId, barangNama, harga, jumlah) {
+    function templateBaris(barangId, barangNama, harga, jumlah, stok) {
         return `
             <td class="text-center">${tableBarang.rows.length + 1}</td>
             <td class="text-center">${barangNama}</td>
@@ -174,7 +174,7 @@
                         </div>
                         <div class="modal-body">
                             <label for="jumlahBaru">Jumlah</label>
-                            <input type="number" id="jumlahBaru" name="jumlahBaru" class="form-control" value="1" min="1" required>
+                            <input type="number" id="jumlahBaru" name="jumlahBaru" class="form-control" value="1" min="1" max="${stok}" required>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -186,7 +186,7 @@
         `;
     }
 
-    function tambahKeranjang(barangId, barangNama, harga, jumlah) {
+    function tambahKeranjang(barangId, barangNama, harga, jumlah, stok) {
         if (items.includes(barangId)) {
             let inputJumlah = tableBarang.querySelectorAll("input[name='jumlah[]']");
             let index = items.indexOf(barangId);
@@ -203,7 +203,7 @@
         items.push(barangId);
 
         let barisBaru = document.createElement("tr");
-        barisBaru.innerHTML = templateBaris(barangId, barangNama, harga, jumlah);
+        barisBaru.innerHTML = templateBaris(barangId, barangNama, harga, jumlah, stok);
 
         tableBarang.appendChild(barisBaru);
         updateTotal();

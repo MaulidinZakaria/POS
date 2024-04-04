@@ -111,7 +111,7 @@ class PenjualanController extends Controller
 
             $stok = (StokModel::where('barang_id', $barang_id)->value('stok_jumlah')) - $jumlahs[$key];
             $date = date('Y-m-d');
-            StokModel::where('barang_id', $barang_id)->update(['stok_jumlah' => $stok, 'stok_tanggal' => $date]);
+            StokModel::where('barang_id', $barang_id)->update(['stok_jumlah' => $stok, 'stok_tanggal' => $date, 'user_id' => $request->user_id]);
         }
 
         return redirect('/penjualan')->with('success', 'Data penjualan berhasil disimpan');

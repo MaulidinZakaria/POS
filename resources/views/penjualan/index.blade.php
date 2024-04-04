@@ -36,7 +36,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Kode Penjualan</th>
-                    <th>Kasir</th>
+                    <th>User</th>
                     <th>Tanggal Penjualan</th>
                     <th>Pembeli</th>
                     <th>Aksi</th>
