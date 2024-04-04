@@ -52,32 +52,6 @@ class StokController extends Controller
             ->make(true);
     }
 
-    public function create()
-    {
-        $breadcrumb = (object) [
-            'title' => 'Tambah Stok',
-            'list' => ['Home', 'Stok', 'Tambah']
-        ];
-
-        $page = (object) [
-            'title' => 'Tambah stok baru'
-        ];
-
-        $activeMenu = 'stok';
-
-        $barang = BarangModel::all();
-        $user = UserModel::all();
-
-        return view('stok.create', compact('breadcrumb', 'page', 'activeMenu', 'barang', 'user'));
-    }
-
-    public function store(Request $request)
-    {
-        
-
-        return redirect('/stok')->with('success', 'Data stok berhasil disimpan');
-    }
-
     public function show(string $id)
     {
         $stok = StokModel::with('barang', 'user')->find($id);
@@ -126,7 +100,7 @@ class StokController extends Controller
             'user_id' => 'required|integer'
         ]);
 
-        $stok = StokModel::find($id)->update([
+        StokModel::find($id)->update([
             'stok_tanggal' => $request->stok_tanggal,
             'stok_jumlah' => $request->stok_jumlah,
             'barang_id' => $request->barang_id,
