@@ -41,8 +41,8 @@ class UserController extends Controller
         return DataTables::of($users)
             ->addIndexColumn()
             ->addColumn('aksi', function ($user) {
-                $btn = '<a href="'.url('/user/' . $user->user_id).'" class="btn btn-info btn-sm">Detail</a>';
-                $btn .= '<a href="'.url('/user/' . $user->user_id . '/edit').'" class="btn btn-warning btn-sm">Edit</a>';
+                $btn = '<a href="'.url('/user/' . $user->user_id).'" class="btn btn-info btn-sm mr-2">Detail</a>';
+                $btn .= '<a href="'.url('/user/' . $user->user_id . '/edit').'" class="btn btn-warning btn-sm mr-2">Edit</a>';
                 $btn .= '<form class="d-inline-block" method="POST" action="'.url('/user/' . $user->user_id).'">'
                     . csrf_field()
                     . method_field('DELETE')
@@ -66,6 +66,7 @@ class UserController extends Controller
         ];
 
         $level = LevelModel::all();
+        
         $activeMenu = 'user';
 
         return view('user.create', compact('breadcrumb', 'page', 'level', 'activeMenu'));
@@ -130,7 +131,7 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'username' => 'required|string|min:3|unique:m_user,username,' . $id . ',user_id',
+            'username' => 'required|string|min:3',
             'nama' => 'required|string|max:100',
             'password' => 'nullable|min:5',
             'level_id' => 'required|integer'
