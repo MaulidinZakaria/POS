@@ -80,6 +80,7 @@
                                             <th class="text-center">Harga</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
+                                        
                                     </thead>
                                     <tbody>
                                         <?php $idx = 1; ?>
@@ -92,7 +93,6 @@
                                             <td class="text-center">{{ $dt->stok->stok_jumlah }}</td>
                                             <td class="text-center">{{ $dt->harga_jual }}</td>
                                             <td class="text-center">
-                                                <!-- <button type="button" data-toggle="modal" data-target="#stokModal{{$dt->barang_id}}" class="btn btn-primary">Pilih</button> -->
                                                 <div class="btn btn-primary" onclick="tambahKeranjang({{ $dt->barang_id }}, '{{ $dt->barang_nama }}', {{ $dt->harga_jual }}, 1, {{ $dt->stok->stok_jumlah }})">Pilih</div>
                                             </td>
                                         </tr>
@@ -229,6 +229,18 @@
 
         let inputJumlah = tr.querySelector("input[name='jumlah[]']");
         let inputJumlahBaru = tr.querySelector("input[name='jumlahBaru']");
+
+        if (parseInt(inputJumlahBaru.value) > parseInt(inputJumlahBaru.max)) {
+            inputJumlahBaru.value = inputJumlah.value;
+            alert("Jumlah melebihi stok");
+            return;
+        } 
+        
+        if (inputJumlahBaru.value.includes(".")) {
+            inputJumlahBaru.value = inputJumlah.value;
+            alert("Inputan tidak boleh bilangan desimal, harus bilangan bulat");
+            return;
+        }
 
         inputJumlah.value = inputJumlahBaru.value;
         let td = tr.querySelectorAll('td')[3];
