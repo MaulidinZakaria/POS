@@ -82,15 +82,20 @@ class BarangController extends Controller
             'harga_jual' => 'required|integer',
             'kategori_id' => 'required|integer',
             'stok_jumlah' => 'required|integer',
-            'user_id' => 'required|integer'
+            'user_id' => 'required|integer',
+            'gambar' => 'required|file|image|max:500',
         ]);
+
+        $imgHashed = $request->gambar->store('public/barang');
+        $path = str_replace('public', 'storage', $imgHashed);
 
         BarangModel::create([
             'barang_kode' => $request->barang_kode,
             'barang_nama' => $request->barang_nama,
             'harga_beli' => $request->harga_beli,
             'harga_jual' => $request->harga_jual,
-            'kategori_id' => $request->kategori_id
+            'kategori_id' => $request->kategori_id,
+            'image' => isset($imgHashed) ? $path : null,
         ]);
 
         StokModel::create([
